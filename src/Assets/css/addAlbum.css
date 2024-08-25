@@ -1,0 +1,45 @@
+/* Add Album file CSS */
+.container{
+    height:90vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+form{
+    display:flex;
+    flex-direction:column;
+    text-align:left;
+    color:white;
+}
+label{
+    display:flex;
+    flex-direction: column;
+    font-size:1.3rem;
+    margin-bottom:2rem;
+}
+input{
+    margin-top:.5rem;
+    border-radius:.35rem;
+    border:none;
+    font-size:1.3rem;
+    color:#231d63;
+    padding:1rem .5rem;
+}
+input:focus{
+    border-color:#231d63;
+    outline:none;
+    box-shadow:0 0 10px white;
+
+}
+.submitBtn{
+    border-radius:.35rem;
+    color:white;
+    background-color: green;
+    font-weight:bold;
+    padding:1rem;
+    font-size:1.3rem;
+    border:none;
+}
+.submitBtn:hover{
+    box-shadow:0 0 10px white;
+}

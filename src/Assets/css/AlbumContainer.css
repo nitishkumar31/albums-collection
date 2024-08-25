@@ -1,0 +1,80 @@
+/* Albums File Css */
+.albumContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.albumBox {
+  width: 300px;
+  height: 300px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  padding: 0.5rem;
+  margin: 1rem;
+  text-transform: capitalize;
+  background: linear-gradient(to top, #3b3667, #625d9e, #4e4e6d);
+  transition: all 0.2s ease-in-out;
+}
+.albumBox:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0px 10px 15px rgb(92, 92, 92);
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 0.5rem;
+}
+.buttons button {
+  /* width: 100px; */
+  width: 40px;
+  /* padding: 0.5rem 0.8rem; */
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: bold;
+  /* letter-spacing: 0.5px; */
+  border: none;
+}
+.buttons button:hover {
+  /* transform: scale(1.05); */
+}
+.buttons .delete {
+  color: white;
+  background-color: rgb(255, 85, 85);
+  border-radius: 5px;
+  margin-right: 0.5rem;
+}
+.buttons .update {
+  background-color: rgb(255, 192, 76);
+  color: black;
+  border-radius: 5px;
+  margin-left: 0.5rem;
+}
+.buttons .update:hover {
+  box-shadow: 0px 0px 10px rgb(255, 192, 76);
+}
+.buttons .delete:hover {
+  box-shadow: 0px 0px 10px rgb(255, 85, 85);
+}
+.albumUserId {
+  background: #2f2e49;
+  width: 80%;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 0.5rem 0;
+}
+.albumName {
+  background: #2f2e49;
+  width: 90%;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 1rem 0.5rem;
+}
