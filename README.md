@@ -15,9 +15,6 @@ Data is fetched from the API and stored in a state and then further tasks are im
 <img align="left" src="https://cdn.freebiesupply.com/logos/large/2x/react-1-logo-png-transparent.png" width="100" height="100">
 <img  src="https://user-images.githubusercontent.com/18380165/224329339-a5174b23-1a5c-4ae4-95c8-ead20a29d77e.png" width="100" height="100">
 
-
-### To see the project: https://albums-collection-react-cn.netlify.app
-
 Preview the project...
 
 ![album1](https://github.com/shubhamdhiman/Albums-Collection-React-Project/assets/18380165/7652d573-64e2-4da3-9e4e-684a9db50f01)
