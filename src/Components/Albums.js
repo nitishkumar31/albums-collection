@@ -1,4 +1,3 @@
-// importing React, css file and toastify
 import React from "react";
 import "../Assets/css/AlbumContainer.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,13 +13,30 @@ function Albums({ album, deleteData, changePage, changeUpdateId }) {
     );
     toast.success(message);
   };
-  // Filtering data and deleting the album which is selected
-  function filterToDelete(id, userId) {
-    let afterDelete = album.filter((value) => value.id !== id);
-    deleteData(afterDelete);
-    showToastMessage(userId);
+
+  // Function to delete album using API
+  async function deleteAlbum(id, userId) {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/albums/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        let afterDelete = album.filter((value) => value.id !== id);
+        deleteData(afterDelete);
+        showToastMessage(userId);
+      } else {
+        throw new Error("Failed to delete album.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while deleting the album.");
+    }
   }
-  // Rendering the album and filtering out the selected album and updating the state via filterToDelete function
+
+  // Rendering the album and filtering out the selected album and updating the state via deleteAlbum function
   function renderAlbum(data, index) {
     return (
       <div className="albumBox" key={index}>
@@ -35,7 +51,7 @@ function Albums({ album, deleteData, changePage, changeUpdateId }) {
             title="Delete"
             className="delete"
             onClick={() => {
-              filterToDelete(data.id, data.userId);
+              deleteAlbum(data.id, data.userId);
             }}
           >
             {/* Delete */}

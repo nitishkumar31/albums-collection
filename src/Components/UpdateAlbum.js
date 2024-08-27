@@ -1,4 +1,3 @@
-// importing react useState() hook , toastify and its css file
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "../Assets/css/UpdateAlbum.css";
@@ -10,38 +9,54 @@ function UpdateAlbum({ updateId, updateData, album }) {
   // Using state to store the previous id of user
   const [prvId, setPrvId] = useState("");
 
+  async function updateAlbum(id, updatedItem) {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/albums/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedItem),
+        }
+      );
+
+      if (response.ok) {
+        const updatedItems = [...album];
+        const index = updatedItems.findIndex((item) => item.id === id);
+        updatedItems[index] = updatedItem;
+        updateData(updatedItems);
+
+        let message = (
+          <p>
+            <strong>UserId {updatedItem.userId}</strong> Data Updated,{" "}
+            <strong>New UserId is {updatedItem.userId}</strong>
+          </p>
+        );
+        toast.success(message, {
+          toastId: "success1",
+        });
+      } else {
+        throw new Error("Failed to update album.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while updating the album.");
+    }
+  }
+
   function updateNewData(e) {
     e.preventDefault();
 
-    // Create a copy of the original array
-    const updatedItems = [...album];
-
-    // Find the object to update
-    const itemToUpdate = updatedItems.find((item) => item.id === updateId);
-
-    // Create a copy of the object
+    const itemToUpdate = album.find((item) => item.id === updateId);
     const updatedItem = { ...itemToUpdate, title: newTitle, userId: prvId };
 
-    // Replace the original object with the updated one
-    const index = updatedItems.findIndex((item) => item.id === updateId);
-    updatedItems[index] = updatedItem;
+    updateAlbum(updateId, updatedItem);
 
-    // Set the updated array as the new state
-    updateData(updatedItems);
-    let message = (
-      <p>
-        <strong>UserId {itemToUpdate.userId}</strong> Data Updated,{" "}
-        <strong>New UserId is {updatedItem.userId}</strong>
-      </p>
-    );
-    // Applying the message after completion of task
-    toast.success(message, {
-      toastId: "success1",
-    });
-    // Changing the states to initial states after data updated
     setNewTitle("");
     setPrvId("");
   }
+
   return (
     <div className="container">
       <form>
