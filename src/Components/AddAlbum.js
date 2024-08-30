@@ -1,4 +1,3 @@
-// importing react, useState renderHook, css file and toastify
 import React, { useState } from "react";
 import "../Assets/css/addAlbum.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,27 +8,45 @@ function AddAlbum({ album, addData }) {
   const [title, setTitle] = useState("");
   const [userId, setUserId] = useState("");
 
-  function addUser(e) {
+  async function addUser(e) {
     e.preventDefault();
 
-    // Copying the data in a new variable and adding the new data
-    let newData = [
-      ...album,
-      { userId: userId, title: title, id: album.length + 1 },
-    ];
-    // Updating the state
-    addData(newData);
-    let message = (
-      <p>
-        Album Added. <strong>UserId is {userId}</strong>
-      </p>
-    );
-    // Displaying the message using toastify
-    toast.success(message);
-    // Changing the states to initial values
+    const newAlbum = { userId: parseInt(userId), title: title };
+
+    try {
+      // Making a POST request to add the album
+      const response = await fetch("https://jsonplaceholder.typicode.com/albums", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newAlbum),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Updating the state with the new album
+        addData([...album, data]);
+
+        // Displaying the success message using toastify
+        let message = (
+          <p>
+            Album Added. <strong>UserId is {data.userId}</strong>
+          </p>
+        );
+        toast.success(message);
+      } else {
+        throw new Error("Failed to add album.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while adding the album.");
+    }
+
+    // Resetting the input fields
     setTitle("");
     setUserId("");
   }
+
   return (
     <div className="container">
       <form>
@@ -46,7 +63,7 @@ function AddAlbum({ album, addData }) {
           ></input>
         </label>
         <label>
-          Id
+          UserId
           {/* Input to take UserId */}
           <input
             type="number"
